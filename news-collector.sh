@@ -3,7 +3,8 @@
 # 新闻自动采集脚本 - 每天早上8点运行
 # 支持目录切换、GitHub更新、飞书推送
 
-GITHUB_TOKEN="***REDACTED***"
+# Token 从环境变量读取，不要硬编码（否则 GitHub push protection 会拦截推送）
+GITHUB_TOKEN="${GITHUB_TOKEN:-$(cat /root/.openclaw/workspace/.github_token 2>/dev/null)}"
 REPO_OWNER="chu-jue"
 REPO_NAME="news-daily"
 DATE=$(date +%Y-%m-%d)
