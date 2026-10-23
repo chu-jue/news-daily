@@ -127,6 +127,14 @@ if [ -n "$GITHUB_TOKEN" ] && [ -n "$REPO_NAME" ]; then
     
     git add news/
     git commit -m "更新新闻: $DATE" 2>/dev/null || echo "没有新内容需要提交"
+
+    # 实际推送到远端（使用 credential helper，避免把 token 写进 remote URL）
+    git config credential.helper "store --file=/root/.openclaw/workspace/.git-credentials"
+    if git push origin main 2>&1; then
+        echo "✅ 已推送到 GitHub: $REPO_OWNER/$REPO_NAME"
+    else
+        echo "❌ 推送失败，请检查网络或 token 权限"
+    fi
 fi
 
 echo "=== 完成 ==="
