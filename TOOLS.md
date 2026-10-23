@@ -44,4 +44,6 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ### GitHub
 - username: chu-jue
-- token: ***REDACTED***
+- token: 存放于 `/root/.openclaw/workspace/.github_token`（已 gitignore，勿写入仓库或提交历史）
+- 凭证方式: `credential.helper store --file=/root/.openclaw/workspace/.git-credentials`
+- remote URL 不要内嵌 token
