@@ -41,6 +41,9 @@ python3 "$WORKDIR/scripts/build_blog.py" --date "$TODAY" --news "$NEWS_JSON"
 
 # 3) 推送 GitHub（先 git，失败则走 REST API 兜底）
 cd "$BLOG_DIR"
+# 先与远端对齐：避免 REST API 兜底产生的远端提交让本地 git push 被拒
+timeout 60 git fetch -q origin gh-pages 2>/dev/null
+git reset -q --hard origin/gh-pages 2>/dev/null
 git add -A >/dev/null 2>&1
 git commit -q -m "添加 ${Y}年${MONTH}月${DAY}日 AI新闻" >/dev/null 2>&1
 if timeout 90 git push -q origin gh-pages 2>/dev/null; then
@@ -51,6 +54,10 @@ else
     timeout 300 python3 scripts/gh_api_push.py ai-news-blog-source "添加 ${Y}年${MONTH}月${DAY}日 AI新闻" \
         index.html archives/index.html "archives/$Y/index.html" "archives/$Y/$MONTH/index.html" \
         tags/AI/index.html "tags/新闻/index.html" "$Y/$MONTH/$DAY/$SLUG/index.html" || echo "API 兜底也失败"
+    # 兜底提交会让远端领先本地，重新对齐以便明天的 git push 可用
+    cd "$BLOG_DIR"
+    timeout 60 git fetch -q origin gh-pages 2>/dev/null
+    git reset -q --hard origin/gh-pages 2>/dev/null && echo "本地已与远端重新对齐"
 fi
 
 # 4) 飞书通知
