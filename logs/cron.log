@@ -6494,3 +6494,16 @@ fatal: unable to access 'https://github.com/chu-jue/ai-news-blog.git/': Empty re
 ✅ Sent via Feishu. Message ID: om_x100b62b5859d7904dc0bdbd0da6b525
 飞书通知已发送
 ==== 完成 ====
+==== 2026-10-22 AI日报开始 ====
+收集到 0 条
+OK: /root/.openclaw/workspace/ai-news-blog-source/2026/10/22/2026-10-22-ai-news/index.html
+git push 失败，改用 REST API 兜底
+200 index.html index.html
+200 archives/index.html archives/index.html
+200 archives/2026/index.html archives/2026/index.html
+200 archives/2026/10/index.html archives/2026/10/index.html
+200 tags/AI/index.html tags/AI/index.html
+200 tags/新闻/index.html tags/新闻/index.html
+200 2026/10/22/2026-10-22-ai-news/index.html 2026/10/22/2026-10-22-ai-news/index.html
+✅ Sent via Feishu. Message ID: om_x100b62a2a8c97080c05c4baa314fe1d
+==== 2026-10-22 完成 ====
